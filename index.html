@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Box | Minecraft Server</title>
+<meta name="description" content="The Box is a custom Minecraft server with BoxGames, Boxmetics, factions, dungeons, TikTok chaos, events, cosmetics, crates, rewards, merch, Discord, Patreon, and Tebex support.">
+<style>
+:root{
+  --cyan:#00eaff;
+  --purple:#8b00ff;
+  --pink:#ff3df2;
+  --bg:#03030a;
+  --panel:rgba(255,255,255,.075);
+  --panel2:rgba(255,255,255,.035);
+  --text:#ffffff;
+  --muted:#c9d7f5;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 14% 13%,rgba(0,255,255,.22),transparent 32%),
+    radial-gradient(circle at 82% 22%,rgba(139,0,255,.24),transparent 35%),
+    radial-gradient(circle at 50% 92%,rgba(255,61,242,.12),transparent 42%),
+    linear-gradient(180deg,#020208,#050014,#000);
+  z-index:-4;
+}
+body:after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:64px 64px;
+  z-index:-3;
+  opacity:.5;
+}
+a{color:inherit}
+.top-alert{
+  padding:10px 7%;
+  text-align:center;
+  background:linear-gradient(90deg,rgba(0,234,255,.16),rgba(139,0,255,.18));
+  border-bottom:1px solid rgba(255,255,255,.12);
+  color:#eaf8ff;
+  font-weight:900;
+  letter-spacing:.4px;
+}
+nav{
+  position:sticky;
+  top:0;
+  z-index:30;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  padding:18px 7%;
+  background:rgba(0,0,0,.68);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+.logo{
+  font-size:28px;
+  font-weight:1000;
+  letter-spacing:3px;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),#fff);
+  -webkit-background-clip:text;
+  color:transparent;
+  white-space:nowrap;
+}
+nav .links{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:16px}
+nav a{
+  text-decoration:none;
+  font-weight:900;
+  opacity:.9;
+  font-size:14px;
+}
+nav a:hover{color:var(--cyan)}
+.hero{
+  min-height:92vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:110px 20px 80px;
+  position:relative;
+}
+.hero-box{max-width:1180px}
+.badge{
+  display:inline-block;
+  padding:10px 18px;
+  border:1px solid rgba(0,255,255,.45);
+  border-radius:999px;
+  background:rgba(0,255,255,.08);
+  box-shadow:0 0 25px rgba(0,255,255,.18);
+  margin-bottom:25px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+h1{
+  font-size:clamp(58px,10vw,160px);
+  line-height:.9;
+  font-weight:1000;
+  letter-spacing:8px;
+  background:linear-gradient(90deg,var(--cyan),#fff,var(--purple),var(--cyan));
+  background-size:300%;
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:shine 6s infinite linear;
+  text-shadow:0 0 60px rgba(0,255,255,.3);
+}
+@keyframes shine{0%{background-position:0%}100%{background-position:300%}}
+.hero p{
+  max-width:960px;
+  margin:30px auto;
+  font-size:22px;
+  line-height:1.65;
+  color:#d7e9ff;
+}
+.buttons{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:18px;
+  margin-top:35px;
+}
+.btn{
+  padding:17px 30px;
+  border-radius:16px;
+  text-decoration:none;
+  font-weight:1000;
+  color:white;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.2);
+  transition:.25s;
+  cursor:pointer;
+}
+.btn.main{
+  background:linear-gradient(90deg,var(--cyan),var(--purple));
+  box-shadow:0 0 35px rgba(0,234,255,.35);
+}
+.btn.pink{background:linear-gradient(90deg,var(--pink),var(--purple))}
+.btn:hover{
+  transform:translateY(-6px) scale(1.04);
+  box-shadow:0 0 40px rgba(0,255,255,.35);
+}
+.ip-wrap{
+  margin:35px auto 0;
+  max-width:920px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:14px;
+}
+.ip-card{
+  padding:20px;
+  border-radius:18px;
+  background:rgba(0,0,0,.58);
+  border:1px solid rgba(0,255,255,.34);
+}
+.ip-label{color:#9cecff;font-weight:900;font-size:13px;letter-spacing:1px;margin-bottom:8px}
+.ip-value{font-size:24px;font-weight:1000;word-break:break-word}
+.small{font-size:14px;color:var(--muted);line-height:1.55;margin-top:8px}
+section{padding:95px 7%}
+.section-title{
+  text-align:center;
+  font-size:clamp(36px,5vw,58px);
+  margin-bottom:18px;
+}
+.section-sub{
+  text-align:center;
+  max-width:980px;
+  margin:0 auto 55px;
+  color:#b9c7e6;
+  font-size:18px;
+  line-height:1.7;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+}
+.card{
+  padding:30px;
+  border-radius:24px;
+  background:linear-gradient(180deg,var(--panel),var(--panel2));
+  border:1px solid rgba(255,255,255,.13);
+  min-height:215px;
+  transition:.25s;
+  position:relative;
+  overflow:hidden;
+}
+.card:hover{
+  transform:translateY(-9px);
+  border-color:var(--cyan);
+  box-shadow:0 0 35px rgba(0,238,255,.16);
+}
+.icon{font-size:42px;margin-bottom:18px}
+.card h3{font-size:25px;margin-bottom:14px}
+.card p,.card li{color:#cdd8ee;line-height:1.6}
+.card ul{padding-left:20px}
+.two{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+  gap:28px;
+}
+.panel{
+  border-radius:28px;
+  padding:35px;
+  background:
+    linear-gradient(135deg,rgba(0,238,255,.12),rgba(137,0,255,.12)),
+    rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.13);
+}
+.panel h3{font-size:31px;margin-bottom:16px}
+.panel p,.panel li{color:#d6e2ff;line-height:1.7}
+.panel ul{padding-left:22px}
+.store-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:22px;
+}
+.store{
+  text-decoration:none;
+  padding:30px;
+  border-radius:24px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.15);
+  transition:.22s;
+}
+.store:hover{
+  transform:translateY(-8px);
+  background:rgba(0,238,255,.12);
+  border-color:var(--cyan);
+}
+.store h3{font-size:25px;margin-bottom:10px}
+.store p{color:#cdd8ee;line-height:1.58}
+.timeline{max-width:980px;margin:auto}
+.step{
+  display:flex;
+  gap:25px;
+  margin-bottom:28px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  padding:26px;
+  border-radius:22px;
+}
+.num{
+  min-width:55px;height:55px;
+  border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:1000;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+}
+.step h3{margin-bottom:8px}
+.step p{color:#c9d6f2;line-height:1.58}
+.notice{
+  max-width:980px;
+  margin:40px auto 0;
+  padding:24px;
+  border-radius:22px;
+  background:rgba(255,200,0,.08);
+  border:1px solid rgba(255,200,0,.25);
+  color:#ffe9a8;
+  line-height:1.65;
+}
+.admin-box{
+  max-width:980px;
+  margin:auto;
+  background:rgba(0,0,0,.55);
+  border:1px solid rgba(0,234,255,.24);
+  border-radius:28px;
+  padding:34px;
+}
+.code{
+  margin-top:18px;
+  padding:18px;
+  background:#050510;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;
+  color:#d7e9ff;
+  overflow:auto;
+  font-family:Consolas,monospace;
+}
+.footer{
+  text-align:center;
+  padding:60px 20px;
+  background:#010106;
+  border-top:1px solid rgba(255,255,255,.1);
+  color:#9da9c7;
+}
+.footer h2{color:white;font-size:36px;margin-bottom:12px}
+@media(max-width:900px){
+  nav{position:relative;flex-direction:column}
+  .hero{padding-top:70px}
+  .step{flex-direction:column}
+  nav .links{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div class="top-alert">Java + Bedrock support • Bedrock IP: <span data-site="bedrockIp">shulkmybox.mcserver.us</span> • Port: <span data-site="bedrockPort">19132</span></div>
+
+<nav>
+  <div class="logo" data-site="serverName">THE BOX</div>
+  <div class="links">
+    <a href="#join">Join</a>
+    <a href="#support">Store</a>
+    <a href="#games">Games</a>
+    <a href="#smp">SMP</a>
+    <a href="#cosmetics">Boxmetics</a>
+    <a href="#bedrock">Bedrock Help</a>
+    <a href="#admin">Admin</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-box">
+    <div class="badge">MINECRAFT JAVA + BEDROCK • CUSTOM SYSTEMS • LIVE CHAOS</div>
+    <h1 data-site="serverName">THE BOX</h1>
+    <p data-site="heroDescription">
+      The Box is a custom Minecraft server built around chaos, minigames, factions,
+      cosmetics, live TikTok events, rewards, crates, custom worlds, and community-driven gameplay.
+      It is made to feel bigger than a normal survival server: more events, more progression,
+      more visuals, more reasons to come back, and more ways to flex.
+    </p>
+    <div class="buttons">
+      <a class="btn main" href="#join">JOIN SERVER</a>
+      <a class="btn pink" data-link="tebex" href="https://the-box-webstore.tebex.io/" target="_blank">TEBEX STORE</a>
+      <a class="btn" data-link="discord" href="https://discord.gg/tNwfpjJbp5" target="_blank">DISCORD</a>
+      <a class="btn" data-link="patreon" href="https://www.patreon.com/c/TheBox67" target="_blank">PATREON</a>
+    </div>
+    <div class="ip-wrap">
+      <div class="ip-card">
+        <div class="ip-label">BEDROCK SERVER ADDRESS</div>
+        <div class="ip-value" data-site="bedrockIp">shulkmybox.mcserver.us</div>
+        <div class="small">Port: <b data-site="bedrockPort">19132</b></div>
+      </div>
+      <div class="ip-card">
+        <div class="ip-label">JAVA SERVER ADDRESS</div>
+        <div class="ip-value" data-site="javaIp">shulkmybox.mcserver.us</div>
+        <div class="small">Use this if your Java setup points to the same server. Edit config.js if your Java IP is different.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="support">
+  <h2 class="section-title">SUPPORT THE BOX</h2>
+  <p class="section-sub">
+    Support the server, get updates, buy perks, join the community, and grab merch.
+    These are the official links for The Box.
+  </p>
+
+  <div class="store-grid">
+    <a class="store" data-link="tebex" href="https://the-box-webstore.tebex.io/" target="_blank">
+      <h3>🛒 Tebex Store</h3>
+      <p>Ranks, crate keys, supporter perks, cosmetics, BoxBucks, bundles, and server upgrades.</p>
+    </a>
+    <a class="store" data-link="patreon" href="https://www.patreon.com/c/TheBox67" target="_blank">
+      <h3>⭐ Patreon</h3>
+      <p>Monthly support, behind-the-scenes updates, special supporter rewards, and long-term server backing.</p>
+    </a>
+    <a class="store" data-link="discord" href="https://discord.gg/tNwfpjJbp5" target="_blank">
+      <h3>💬 Discord</h3>
+      <p>Announcements, polls, bug reports, tickets, updates, sneak peeks, and people to play with.</p>
+    </a>
+    <a class="store" data-link="printful" href="https://thebox.printful.me/" target="_blank">
+      <h3>👕 Merch Store</h3>
+      <p>Official The Box merch through Printful, including clothing and real-life supporter items.</p>
+    </a>
+  </div>
+</section>
+
+<section id="games">
+  <h2 class="section-title">BOXGAMES</h2>
+  <p class="section-sub">
+    BoxGames is the custom game side of the server: queues, parties, signs, spectators,
+    map resets, stats, leaderboards, and replayable minigames.
+  </p>
+
+  <div class="grid">
+    <div class="card"><div class="icon">🧱</div><h3>Pillars of Fortune</h3><p>Spawn on pillars and receive random items over time. Modes can include classic random drops, balanced drops, rapid inventories, position swaps, rising lava, and map cycles.</p></div>
+    <div class="card"><div class="icon">⚔️</div><h3>PvP Queues</h3><p>Crystal, UHC, Axe, Potion, OP, custom kits, live signs, spectators, best-of rounds, and arena resets.</p></div>
+    <div class="card"><div class="icon">🎨</div><h3>Build Battle</h3><p>Theme voting, build plots, judging, placements, map cleanup, and competition rounds.</p></div>
+    <div class="card"><div class="icon">👀</div><h3>Prop Hunt</h3><p>Hide as props, hunt players, use taunts, spectate rounds, and play custom hide-and-seek maps.</p></div>
+    <div class="card"><div class="icon">❄️</div><h3>Spleef</h3><p>Break snow, throw snowballs, survive falling layers, and knock everyone else out first.</p></div>
+    <div class="card"><div class="icon">🎮</div><h3>More Games</h3><p>Flashback worlds, party games, novelty worlds, limited-time events, and new Box modes as the server grows.</p></div>
+  </div>
+</section>
+
+<section id="smp">
+  <h2 class="section-title">SURVIVAL, FACTIONS, AND WAR</h2>
+  <p class="section-sub">
+    The main server world is about progression: factions, claims, war, banners, money,
+    backpacks, traps, trackers, dungeons, custom loot, shops, and server-wide events.
+  </p>
+
+  <div class="grid">
+    <div class="card"><div class="icon">🏰</div><h3>Factions</h3><p>Create or join factions, manage roles, use faction chat, bank money, build bases, and fight for control.</p></div>
+    <div class="card"><div class="icon">🛡️</div><h3>Claims</h3><p>Protect bases with claim systems, claim sticks, permissions, faction access, and teleport options.</p></div>
+    <div class="card"><div class="icon">🚩</div><h3>Banners & War</h3><p>Faction banners become raid targets with stealing, returning, combining, upgrades, and war-time rules.</p></div>
+    <div class="card"><div class="icon">💰</div><h3>Economy</h3><p>Earn money, sell items, use shops, trade with players, buy claim tools, and fund faction upgrades.</p></div>
+    <div class="card"><div class="icon">🎒</div><h3>Backpacks</h3><p>Special backpacks can store items and unlock smelter, crafter, potion, and dungeon-style upgrades.</p></div>
+    <div class="card"><div class="icon">🪤</div><h3>Traps & Trackers</h3><p>Protect bases with traps, alerts, trackers, snowball traps, and faction defense tools.</p></div>
+  </div>
+</section>
+
+<section id="dungeons">
+  <h2 class="section-title">DUNGEONS, DROPS, AND EVENTS</h2>
+  <p class="section-sub">
+    The Box is designed around server moments: rare keys, supply drops, waves,
+    bosses, clue broadcasts, custom armor, tools, elytras, and loot worth fighting over.
+  </p>
+  <div class="two">
+    <div class="panel">
+      <h3>🗝️ Dungeon Runs</h3>
+      <p>Dungeon keys unlock wave-based fights with custom mobs, rare rewards, custom armor, tools, elytras, backpack shards, and boss loot.</p>
+    </div>
+    <div class="panel">
+      <h3>📦 Supply Drops</h3>
+      <p>Supply drops can broadcast clues, land with visuals, spawn guards, refill loot, and give rare dungeon keys or chaos items.</p>
+    </div>
+  </div>
+</section>
+
+<section id="cosmetics">
+  <h2 class="section-title">BOXMETICS</h2>
+  <p class="section-sub">
+    Boxmetics is the cosmetic economy: Bubbles, BoxBucks, Boxlets, crates,
+    daily rewards, gadgets, trails, decals, pets, balloons, wings, outfits, and flex effects.
+  </p>
+
+  <div class="grid">
+    <div class="card"><div class="icon">🫧</div><h3>Bubbles</h3><p>Main cosmetic currency for crates, unlocks, basic cosmetics, and progression rewards.</p></div>
+    <div class="card"><div class="icon">💎</div><h3>BoxBucks</h3><p>Premium-style currency for higher-tier crates, special cosmetics, supporter items, and rare unlocks.</p></div>
+    <div class="card"><div class="icon">🎁</div><h3>Boxlets</h3><p>Crate currency used to open cosmetic rewards and unlock visual effects.</p></div>
+    <div class="card"><div class="icon">✨</div><h3>Trails & Particles</h3><p>Bubble trails, smoke effects, floor decals, animated patterns, victory effects, and rare visuals.</p></div>
+    <div class="card"><div class="icon">🐾</div><h3>Pets & Balloons</h3><p>Cosmetic companions, mini mobs, display pets, balloons, and moving visuals that follow players.</p></div>
+    <div class="card"><div class="icon">🪄</div><h3>Gadgets</h3><p>Clickable items with cooldowns, visual effects, bubbles, launchers, portals, and cosmetic chaos.</p></div>
+  </div>
+</section>
+
+<section id="tiktok">
+  <h2 class="section-title">TIKTOK LIVE CHAOS</h2>
+  <p class="section-sub">
+    Live stream events can connect to Minecraft chaos. Gifts, comments, likes,
+    and goals can trigger mobs, lightning, bosses, fish, villagers, golems, and event chains.
+  </p>
+  <div class="grid">
+    <div class="card"><div class="icon">🎁</div><h3>Gift Triggers</h3><p>Specific gifts can spawn mobs, start chaos, activate effects, or trigger streamer events.</p></div>
+    <div class="card"><div class="icon">❤️</div><h3>Like Goals</h3><p>A bossbar can fill from likes and release random events when the goal is reached.</p></div>
+    <div class="card"><div class="icon">💬</div><h3>Comment Commands</h3><p>Viewers can type commands like fish, zombie, cow, llama, or other words to trigger events.</p></div>
+  </div>
+</section>
+
+<section id="bedrock">
+  <h2 class="section-title">BEDROCK JOIN GUIDE</h2>
+  <p class="section-sub">
+    Bedrock players should use <b>shulkmybox.mcserver.us</b> with port <b>19132</b>.
+    Console players may need DNS settings or the Better Together app depending on platform.
+  </p>
+
+  <div class="timeline">
+    <div class="step"><div class="num">1</div><div><h3>Mobile / Windows Bedrock</h3><p>Go to Play → Servers → Add Server. Server Address: <b>shulkmybox.mcserver.us</b>. Port: <b>19132</b>.</p></div></div>
+    <div class="step"><div class="num">2</div><div><h3>Xbox / PlayStation / Switch</h3><p>Consoles usually do not let you freely add servers the same way. Use a DNS method or a helper app such as Better Together / BedrockTogether from your phone to make the server appear on LAN.</p></div></div>
+    <div class="step"><div class="num">3</div><div><h3>DNS Method</h3><p>Change the console DNS to a trusted Bedrock custom server DNS, open Minecraft, then use the server list redirect menu to enter The Box address and port.</p></div></div>
+    <div class="step"><div class="num">4</div><div><h3>Better Together App Method</h3><p>Open the helper app on the same Wi-Fi as your console, enter <b>shulkmybox.mcserver.us</b> and <b>19132</b>, then join from the Friends/LAN tab on console.</p></div></div>
+  </div>
+
+  <div class="notice">
+    Console Bedrock joining depends on the player’s device, Wi-Fi, and platform restrictions. If one method does not show the server, try the other method or ask in Discord for help.
+  </div>
+</section>
+
+<section id="join">
+  <h2 class="section-title">HOW TO JOIN</h2>
+  <div class="timeline">
+    <div class="step"><div class="num">1</div><div><h3>Java Players</h3><p>Open Minecraft Java → Multiplayer → Add Server → enter <b data-site="javaIp">shulkmybox.mcserver.us</b>.</p></div></div>
+    <div class="step"><div class="num">2</div><div><h3>Bedrock Players</h3><p>Open Minecraft Bedrock → Servers → Add Server → address <b data-site="bedrockIp">shulkmybox.mcserver.us</b>, port <b data-site="bedrockPort">19132</b>.</p></div></div>
+    <div class="step"><div class="num">3</div><div><h3>Join The Discord</h3><p>Use Discord for help, updates, bug reports, events, server announcements, and community support.</p></div></div>
+    <div class="step"><div class="num">4</div><div><h3>Play The Box</h3><p>Join games, unlock cosmetics, build a faction, run dungeons, fight events, and become part of the server.</p></div></div>
+  </div>
+</section>
+
+<section id="admin">
+  <h2 class="section-title">ADMIN EDITING</h2>
+  <p class="section-sub">
+    This is a static GitHub Pages website, so it cannot have a real private live backend without adding
+    a service like Decap CMS, Netlify, Cloudflare Pages, or a custom server. For now, this pack gives you
+    the easiest safe admin-style editing: change the <b>config.js</b> file and the site updates.
+  </p>
+  <div class="admin-box">
+    <h3>Easy edit file:</h3>
+    <div class="code">config.js</div>
+    <p class="small">
+      Open <b>config.js</b> in GitHub, click the pencil/edit button, change IPs, links, headline text,
+      or description, then click Commit Changes. That is your simple admin backend for now.
+    </p>
+    <br>
+    <h3>Want a real login admin panel later?</h3>
+    <p class="small">
+      Use Netlify + Decap CMS or Cloudflare Pages + a CMS. GitHub Pages by itself is public static hosting,
+      so it cannot securely save admin edits from a private dashboard without an external backend.
+    </p>
+  </div>
+</section>
+
+<div class="footer">
+  <h2>THE BOX</h2>
+  <p>BoxGames • Boxmetics • Factions • Dungeons • TikTok Chaos • Merch • Community</p>
+  <br>
+  <p>Bedrock: <b data-site="bedrockIp">shulkmybox.mcserver.us</b> Port <b data-site="bedrockPort">19132</b></p>
+  <p>Java: <b data-site="javaIp">shulkmybox.mcserver.us</b></p>
+  <br>
+  <p>© 2026 The Box. Not affiliated with Mojang, Microsoft, TikTok, Tebex, Patreon, Discord, or Printful.</p>
+</div>
+
+<script src="config.js"></script>
+<script>
+(function(){
+  if(!window.THE_BOX_CONFIG) return;
+  const c = window.THE_BOX_CONFIG;
+  document.querySelectorAll("[data-site]").forEach(el=>{
+    const key = el.getAttribute("data-site");
+    if(c[key]) el.textContent = c[key];
+  });
+  document.querySelectorAll("[data-link]").forEach(el=>{
+    const key = el.getAttribute("data-link");
+    if(c.links && c.links[key]) el.href = c.links[key];
+  });
+})();
+</script>
+
+</body>
+</html>
